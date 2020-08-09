@@ -5,7 +5,6 @@ const Context = React.createContext();
 
 const cors = "https://cors-anywhere.herokuapp.com/";
 const API_KEY = "3bd72b60c2052a3b71058bc9f4ce8b65";
-
 const reducer = (state, action) => {
   switch (action.type) {
     case "SEARCH_TRACKS":
@@ -27,7 +26,7 @@ export class Provider extends Component {
   componentDidMount() {
     axios
       .get(
-        `${cors}https://api.musixmatch.com/ws/1.1/chart.tracks.get?&page=1&page_size=10&country=us&f_has_lyrics=1&apikey=${API_KEY}`
+        `${cors}https://api.musixmatch.com/ws/1.1/chart.tracks.get?&page=1&page_size=10&country=uk&f_has_lyrics=1&apikey=${API_KEY}`
       )
       .then((res) => {
         this.setState({ track_list: res.data.message.body.track_list });

@@ -4,7 +4,6 @@ import axios from "axios";
 import Spinner from "../layouts/Spinner";
 const cors = "https://cors-anywhere.herokuapp.com/";
 const API_KEY = "3bd72b60c2052a3b71058bc9f4ce8b65";
-
 class Lyrics extends Component {
   state = {
     track: {},
@@ -16,14 +15,14 @@ class Lyrics extends Component {
         `${cors}https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${this.props.match.params.id}&apikey=${API_KEY}`
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({ lyric: res.data.message.body.lyrics.lyrics_body });
         return axios
           .get(
             `${cors}https://api.musixmatch.com/ws/1.1/track.get?track_id=${this.props.match.params.id}&apikey=${API_KEY}`
           )
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             this.setState({
               track: `${res.data.message.body.track.track_name} by ${res.data.message.body.track.artist_name}`,
             });

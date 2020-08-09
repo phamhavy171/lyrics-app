@@ -23,7 +23,6 @@ class Search extends Component {
           type: "SEARCH_TRACKS",
           payload: res.data.message.body.track_list,
         });
-        console.log(res.data);
         this.setState({ trackTittle: "" });
       })
       .catch((err) => console.log(err));
