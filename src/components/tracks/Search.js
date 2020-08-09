@@ -34,7 +34,7 @@ class Search extends Component {
           const { dispatch } = value;
           return (
             <div className="card card-body mb-4 p-4">
-              <h1 className="text-center display-4">Search any song</h1>
+              <h1 className="text-center display-4">Find a song</h1>
               <form onSubmit={this.searchTrack.bind(this, dispatch)}>
                 <div className="form-group">
                   <input
