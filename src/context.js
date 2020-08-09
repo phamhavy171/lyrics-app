@@ -1,28 +1,36 @@
 import React, { Component } from "react";
-// import Genius from "genius-api";
-import Axios from "axios";
+import axios from "axios";
+require("dotenv").config();
 const Context = React.createContext();
-const access_token =
-  "Op0e1dDzQbjt4KAe2gmhZjlh5TRW4PsuC8ty3yBL4hrowypcHYURKcWCamZIJ0HD";
-// const genius = new Genius(access_token);
-const cors = "https://cors-anywhere.herokuapp.com/";
 
+const cors = "https://cors-anywhere.herokuapp.com/";
+const API_KEY = "3bd72b60c2052a3b71058bc9f4ce8b65";
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "SEARCH_TRACKS":
+      return {
+        ...state,
+        track_list: action.payload,
+        heading: "Search Results",
+      };
+    default:
+      return state;
+  }
+};
 export class Provider extends Component {
   state = {
     track_list: [],
-    heading: "top 10 track",
+    heading: "Top 10 Tracks",
+    dispatch: (action) => this.setState((state) => reducer(state, action)),
   };
   componentDidMount() {
-    Axios.get(
-      `${cors}https://api.genius.com/search?q=stan&access_token=${access_token}`
-    )
+    axios
+      .get(
+        `${cors}https://api.musixmatch.com/ws/1.1/chart.tracks.get?&page=1&page_size=10&country=us&f_has_lyrics=1&apikey=${API_KEY}`
+      )
       .then((res) => {
-        console.log(res.data.response.hits);
-        this.setState({
-          track_list: res.data.response.hits.map((song) => {
-            return <div>{song.result}</div>;
-          }),
-        });
+        this.setState({ track_list: res.data.message.body.track_list });
       })
       .catch((err) => console.log(err));
   }

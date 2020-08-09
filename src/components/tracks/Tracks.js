@@ -9,7 +9,6 @@ class Tracks extends Component {
       <div>
         <Consumer>
           {(value) => {
-            console.log(value);
             if (
               value.track_list === undefined ||
               value.track_list.length === 0
@@ -23,9 +22,12 @@ class Tracks extends Component {
                     {value.track_list.map((item) => {
                       return (
                         <Track
-                          key={item.props.children.id}
+                          key={item.track.track_id}
                           track={item}
-                          song_name={item.props.children.full_title}
+                          song_name={item.track.track_name}
+                          artist_name={item.track.artist_name}
+                          album={item.track.album_name}
+                          track_id={item.track.track_id}
                         />
                       );
                     })}
